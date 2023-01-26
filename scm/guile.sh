@@ -4,5 +4,5 @@ set -xe
 
 SOCKET=$(git rev-parse --show-toplevel)/.guile-repl.socket
 if [ -f $SOCKET ]; then rm $SOCKET; fi
-guile --listen=$SOCKET
+guile --listen=$SOCKET --no-auto-compile
 rm $SOCKET
