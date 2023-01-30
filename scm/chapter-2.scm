@@ -1,5 +1,4 @@
 #lang scheme
-
 ;; chapter 2
 
 ;; ---------------------------------------- 2.1 ----------------------------------------
@@ -88,6 +87,8 @@
 (define (test-2.4)
   (display (and 
              (= (acar (acons 1 2)) 1)
+             (= (acdr (acons 1 2)) 2)
+             (= (acar (acons 1 2)) 1)
              (= (acdr (acons 1 2)) 2))))
 
 ;; works
@@ -158,7 +159,7 @@
 
 (define (add-interval x y)
   (make-interval (+ (lower-bound x) (lower-bound y))
-     (+ (upper-bound x) (upper-bound y))))
+                 (+ (upper-bound x) (upper-bound y))))
 
 (define (mul-interval x y)
   (let ((p1 (* (lower-bound x) (lower-bound y)))
@@ -166,12 +167,12 @@
         (p3 (* (upper-bound x) (lower-bound y)))
         (p4 (* (upper-bound x) (upper-bound y))))
     (make-interval (min p1 p2 p3 p4)
-       (max p1 p2 p3 p4))))
+                   (max p1 p2 p3 p4))))
 
 (define (div-interval x y)
   (mul-interval x 
-    (make-interval (/ 1.0 (lower-bound x))
-       (/ 1.0 (upper-bound y)))))
+                (make-interval (/ 1.0 (lower-bound x
+                                                   (/ 1.0 (upper-bound y)))))))
 
 (define (test-2.7) 
   (mul-interval (make-interval 1 2) (make-interval 2 5))
@@ -188,7 +189,7 @@
 
 (define (sub-interval x y)
   (make-interval (- (lower-bound x) (upper-bound y))
-     (- (upper-bound x) (lower-bound y))))
+                 (- (upper-bound x) (lower-bound y))))
 
 
 (sub-interval (make-interval 2 7) (make-interval 2 5))
